@@ -1,41 +1,42 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity ^0.8.0;
 
-contract MyToken {
+contract Fundraising {
+    address public owner;
+    uint256 public goal;
+    uint256 public totalContribution;
+    bool public goalReached;
+    mapping(address => uint256) public contributions;
 
-    string public tokenName = "SALY";
-    string public tokenAbbrv = "SAL";
-    uint public totalSupply = 0;
-
-    mapping(address => uint) public balances;
-
-    function mint(address _address, uint _value) public {
-        require(_address != address(0) && _value > 0, "Invalid address or value");
-
-        totalSupply += _value;
-        balances[_address] += _value;
-
-        assert(balances[_address] >= _value);
+    constructor(uint256 _goal) {
+        require(_goal > 0, "Goal must be greater than zero");
+        owner = msg.sender;
+        goal = _goal;
+        totalContribution = 0;
+        goalReached = false;
     }
 
-    function burn(address _address, uint _value) public {
-        require(balances[_address] >= _value, "Insufficient balance");
+    function contribute(address _contributor, uint256 _amount) public {
+        require(_amount > 0, "Contribution must be greater than zero");
 
-        totalSupply -= _value;
-        balances[_address] -= _value;
+        contributions[_contributor] += _amount;
+        totalContribution += _amount;
 
-        assert(balances[_address] >= 0);
-    }
-
-    function transfer(address _to, uint _value) public {
-        require(_to != address(0) && _value > 0, "Invalid address or value");
-        
-        if (balances[msg.sender] < _value) {
-            revert("Insufficient balance");
+        if (totalContribution >= goal && !goalReached) {
+            goalReached = true;
         }
+    }
 
-        balances[msg.sender] -= _value;
-        balances[_to] += _value;
+    function amountNeededToReachGoal() public view returns (uint256) {
+        if (goalReached) {
+            revert("Goal already reached");
+        }
+        return goal - totalContribution;
+    }
 
+    function hasExceededGoal() public view returns (bool) {
+        assert(totalContribution <= goal + 10**18);
+        return totalContribution > goal;
     }
 }
+
