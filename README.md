@@ -5,7 +5,7 @@ This Solidity program demonstrates a simple token contract named "MyToken" with 
 
 Description
 
-The MyToken contract is written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract includes functions to mint new tokens, burn existing tokens, transfer tokens between addresses and use of error handling statements. This program serves as a basic introduction to token management in Solidity and can be used as a foundation for more advanced token projects.
+The Fundraising contract is written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract includes functions to mint new tokens, burn existing tokens, transfer tokens between addresses and use of error handling statements. This program serves as a basic introduction to token management in Solidity and can be used as a foundation for more advanced token projects.
 
 
 Getting Started
@@ -20,15 +20,16 @@ Compile the Code:
 Click on the "Solidity Compiler" tab in the left-hand sidebar.
 Ensure the "Compiler" option is set to "0.8.18" (or another compatible version).
 Click on the "Compile MyToken.sol" button.
+Enter the value for "_goal".
 Deploy the Contract:
 Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
-Select the "MyToken" contract from the dropdown menu.
+Select the "Fundraising" contract from the dropdown menu.
 Click on the "Deploy" button.
 Interact with the Contract:
-After deployment, you can interact with the contract's functions (mint, burn, transfer).
-For example, to mint tokens:
-Click on the "MyToken" contract in the left-hand sidebar.
-Enter the address and the number of tokens to mint in the mint function input fields.
+After deployment, you can interact with the contract's functions (contribute, contribution, amountNeededToReachGoal, hasExceededGoal).
+For example, to contribute:
+Click on the "cintribute" contract in the left-hand sidebar.
+Enter the address and the number of tokens to contribute in the contribute function input fields.
 Click on the "transact" button to execute the function.
 
 
